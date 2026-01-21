@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Danh sách sản phẩm</title>
+    <title>Home</title>
     <style>
         * {
             margin: 0;
@@ -27,41 +27,45 @@
         }
         h1 {
             font-size: 28px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+        }
+        p {
+            margin-bottom: 24px;
+            color: #4a6a85;
         }
         ul {
             list-style: none;
             display: grid;
-            gap: 8px;
-            margin-bottom: 24px;
+            gap: 12px;
         }
-        .btn {
-            display: inline-block;
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 1px solid #d7e4f3;
-            background: #f5f9ff;
+        a {
+            text-decoration: none;
             color: #0b2b4b;
             font-weight: 600;
-            text-decoration: none;
+            padding: 12px 14px;
+            display: inline-block;
+            border-radius: 12px;
+            background: #f5f9ff;
+            border: 1px solid #d7e4f3;
             transition: all 0.15s ease;
         }
-        .btn:hover {
+        a:hover {
             background: #ffc933;
-            border-color: #ffc933;
             color: #0b2b4b;
+            border-color: #ffc933;
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1>Danh sách sản phẩm</h1>
+        <h1>Trang chủ</h1>
+        <p>Đi tới các trang bài tập:</p>
         <ul>
-            <li>Sản phẩm 1</li>
-            <li>Sản phẩm 2</li>
-            <li>Sản phẩm 3</li>
+            <li><a href="/product">Danh sách sản phẩm</a></li>
+            <li><a href="/product/add">Thêm sản phẩm</a></li>
+            <li><a href="/banco/$n">Bàn cờ</a></li>
+            <li><a href="/sinhvien">Thông tin sinh viên</a></li>
         </ul>
-        <a class="btn" href="{{ route('product.add') }}">Thêm sản phẩm</a>
     </div>
 </body>
 </html>

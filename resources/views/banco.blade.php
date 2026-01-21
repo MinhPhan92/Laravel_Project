@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Danh sách sản phẩm</title>
+    <title>Bàn cờ vua</title>
     <style>
         * {
             margin: 0;
@@ -26,42 +26,38 @@
             box-shadow: 0 16px 32px rgba(0,0,0,0.08);
         }
         h1 {
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 16px;
         }
-        ul {
-            list-style: none;
-            display: grid;
-            gap: 8px;
-            margin-bottom: 24px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 16px;
-            border-radius: 12px;
+        table {
+            border-collapse: collapse;
+            width: fit-content;
             border: 1px solid #d7e4f3;
-            background: #f5f9ff;
-            color: #0b2b4b;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.15s ease;
         }
-        .btn:hover {
-            background: #ffc933;
-            border-color: #ffc933;
-            color: #0b2b4b;
+        td {
+            width: 46px;
+            height: 46px;
+        }
+        .white {
+            background-color: #ffffff;
+        }
+        .black {
+            background-color: #0b2b4b;
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <h1>Danh sách sản phẩm</h1>
-        <ul>
-            <li>Sản phẩm 1</li>
-            <li>Sản phẩm 2</li>
-            <li>Sản phẩm 3</li>
-        </ul>
-        <a class="btn" href="{{ route('product.add') }}">Thêm sản phẩm</a>
+        <h1>Bàn cờ vua {{ $n }}x{{ $n }}</h1>
+        <table>
+            @for($i = 0; $i < $n; $i++)
+                <tr>
+                    @for($j = 0; $j < $n; $j++)
+                        <td class="{{ ($i + $j) % 2 === 0 ? 'white' : 'black' }}"></td>
+                    @endfor
+                </tr>
+            @endfor
+        </table>
     </div>
 </body>
 </html>
