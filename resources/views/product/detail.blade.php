@@ -1,43 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Chi tiết sản phẩm</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
-        body {
-            background: #eaf3fb;
-            color: #0b2b4b;
-            padding: 32px;
-        }
-        .card {
-            max-width: 720px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 28px 32px;
-            box-shadow: 0 16px 32px rgba(0,0,0,0.08);
-        }
-        h1 {
-            font-size: 26px;
-            margin-bottom: 12px;
-        }
-        p {
-            color: #4a6a85;
-        }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h1>Chi tiết sản phẩm</h1>
-        <p>ID: {{ $id }}</p>
+@extends('layouts.app')
+
+@section('title', 'Product Detail')
+
+@section('content')
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-6">
+        <a href="/product" class="text-sm text-[#706f6c] dark:text-[#A1A09A] hover:text-[#f53003] dark:hover:text-[#FF4433] transition-colors inline-flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Back to Products
+        </a>
     </div>
-</body>
-</html>
+
+    <div class="bg-white dark:bg-[#161615] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-lg p-8">
+        <h1 class="text-3xl font-bold text-[#1b1b18] dark:text-[#EDEDEC] mb-4">Product Detail</h1>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-[#706f6c] dark:text-[#A1A09A] mb-1">Product ID</label>
+                <p class="text-lg text-[#1b1b18] dark:text-[#EDEDEC]">{{ $id }}</p>
+            </div>
+            
+            <div class="pt-4 border-t border-[#e3e3e0] dark:border-[#3E3E3A]">
+                <p class="text-sm text-[#706f6c] dark:text-[#A1A09A]">
+                    Product details will be displayed here.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

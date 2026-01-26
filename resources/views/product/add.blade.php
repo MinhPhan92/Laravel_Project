@@ -1,84 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Thêm sản phẩm</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
-        body {
-            background: #eaf3fb;
-            color: #0b2b4b;
-            padding: 32px;
-        }
-        .card {
-            max-width: 720px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 28px 32px;
-            box-shadow: 0 16px 32px rgba(0,0,0,0.08);
-        }
-        h1 {
-            font-size: 26px;
-            margin-bottom: 16px;
-        }
-        form {
-            display: grid;
-            gap: 16px;
-        }
-        label {
-            font-weight: 600;
-            margin-bottom: 4px;
-            display: block;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #d7e4f3;
-            border-radius: 12px;
-            font-size: 15px;
-        }
-        button {
-            padding: 12px 16px;
-            border: 1px solid #ffc933;
-            background: #ffc933;
-            color: #0b2b4b;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-        button:hover {
-            filter: brightness(0.97);
-        }
-        a {
-            color: #0b2b4b;
-            text-decoration: none;
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h1>Thêm sản phẩm mới</h1>
-        <form>
+@extends('layouts.app')
+
+@section('title', 'Add New Product')
+
+@section('content')
+<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold text-[#1b1b18] dark:text-[#EDEDEC]">Add New Product</h1>
+        <p class="mt-2 text-sm text-[#706f6c] dark:text-[#A1A09A]">Fill in the form below to add a new product to the system.</p>
+    </div>
+
+    <div class="bg-white dark:bg-[#161615] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-lg p-6">
+        <form action="/product/store" method="POST" class="space-y-6">
+            @csrf
+            
             <div>
-                <label for="name">Tên sản phẩm:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="name" class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC] mb-2">
+                    Product Name
+                </label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    required
+                    class="w-full px-4 py-2 border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-sm bg-white dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-[#EDEDEC] focus:outline-none focus:ring-2 focus:ring-[#f53003] dark:focus:ring-[#FF4433] focus:border-transparent transition-all"
+                    placeholder="Enter product name"
+                >
             </div>
+
             <div>
-                <label for="price">Giá sản phẩm:</label>
-                <input type="number" id="price" name="price" required>
+                <label for="price" class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC] mb-2">
+                    Price
+                </label>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#706f6c] dark:text-[#A1A09A]">$</span>
+                    <input 
+                        type="number" 
+                        id="price" 
+                        name="price" 
+                        step="0.01"
+                        min="0"
+                        required
+                        class="w-full pl-8 pr-4 py-2 border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-sm bg-white dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-[#EDEDEC] focus:outline-none focus:ring-2 focus:ring-[#f53003] dark:focus:ring-[#FF4433] focus:border-transparent transition-all"
+                        placeholder="0.00"
+                    >
+                </div>
             </div>
-            <button type="submit">Thêm sản phẩm</button>
+
+            <div class="flex gap-4 pt-4">
+                <button 
+                    type="submit"
+                    class="px-5 py-2 bg-[#1b1b18] dark:bg-[#eeeeec] dark:text-[#1C1C1A] hover:bg-black dark:hover:bg-white border border-black dark:border-[#eeeeec] dark:hover:border-white text-white dark:text-[#1C1C1A] rounded-sm text-sm font-medium transition-colors"
+                >
+                    Add Product
+                </button>
+                <a 
+                    href="/product"
+                    class="px-5 py-2 border border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b] rounded-sm text-sm text-[#1b1b18] dark:text-[#EDEDEC] transition-colors inline-flex items-center"
+                >
+                    Cancel
+                </a>
+            </div>
         </form>
     </div>
-</body>
-</html>
+</div>
+@endsection
