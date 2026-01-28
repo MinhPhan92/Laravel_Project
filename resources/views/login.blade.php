@@ -50,6 +50,11 @@
                 </button>
             </div>
         </form>
+        <button>
+            <a href="{{ route('signin') }}" class="text-sm text-[#706f6c] dark:text-[#A1A09A] hover:underline">
+                Đăng ký
+            </a>
+        </button>
     </div>
 </div>
 @endsection

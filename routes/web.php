@@ -26,6 +26,15 @@ use App\Http\Controllers\AuthController;
 //     return view('product.detail', ['id' => $id]);
 // });
 
+Route::get('/', function(){
+    if(!session()->has('username')){
+        return redirect()->route('login');
+    }
+    else{
+        return redirect()->route('home');
+    }
+});
+
 Route::prefix('product')->group(function () {
     Route::controller(ProductController::class)->group(function(){
         Route::get('/', 'index')->middleware(CheckTimeAccess::class);
@@ -44,21 +53,25 @@ Route::post('/product/checkLogin', [ProductController::class, 'checkLogin']);
 Route::get('/register', [ProductController::class, 'register'])->name('register');
 Route::post('/register', [ProductController::class, 'checkRegister']);
 
-// Route::get('/logout', [ProductController::class, 'logout']);
-
-Route::get('/', function(){
-    if(!session()->has('username')){
-        return redirect()->route('login');
-    }
-    else{
-        return redirect()->route('home');
-    }
-});
+Route::get('/logout', [ProductController::class, 'logout']);
 
 Route::resource('test', TestController::class);
 
 Route::get('/signin', [AuthController::class, 'SignIn'])->name('signin');
 Route::post('/signin', [AuthController::class, 'CheckSignIn'])->name('checksignin');
+
+Route::get('/age', function(){
+    return view('age');
+});
+
+Route::post('/age', function(\Illuminate\Http\Request $request){
+    session(['age' => $request->age]);
+    return "đã lưu tuổi vào session";
+});
+
+Route::get('/restrict', function(){
+    return "bạn đã truy cập vào trang bị hạn chế";
+})->middleware(App\Http\Middleware\CheckAge::class)->name('home');
 
 Route::fallback(function() {
     return view('error.404');

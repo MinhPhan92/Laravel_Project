@@ -18,7 +18,7 @@ class AuthController extends Controller
             'password' => '123abc',
             'mssv' => '0114567',
             'lopmonhoc' => '67pm1',
-            'gioitinh' => 'nam',
+            'gioitinh' => 'Nam',
         ];
 
         // lấy dữ liệu từ form
