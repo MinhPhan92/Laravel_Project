@@ -73,6 +73,16 @@ Route::get('/restrict', function(){
     return "bạn đã truy cập vào trang bị hạn chế";
 })->middleware(App\Http\Middleware\CheckAge::class)->name('home');
 
+// Student information route with named route and default values
+Route::get('/sinhvien/{name?}/{mssv?}', [ProductController::class, 'sinhvien'])
+    ->where(['name' => '[a-zA-Z\s]+', 'mssv' => '[0-9]+'])
+    ->name('sinhvien');
+
+// Chessboard route with named route
+Route::get('/banco/{n}', [ProductController::class, 'banco'])
+    ->where('n', '[0-9]+')
+    ->name('banco');
+
 Route::fallback(function() {
     return view('error.404');
 });

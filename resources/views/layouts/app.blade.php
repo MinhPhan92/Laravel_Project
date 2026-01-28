@@ -28,10 +28,16 @@
                         <a href="/product" class="px-4 py-2 text-sm text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#f53003] dark:hover:text-[#FF4433] transition-colors">
                             Products
                         </a>
-                        <a href="/product/add" class="px-4 py-2 text-sm text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#f53003] dark:hover:text-[#FF4433] transition-colors">
+                        <a href="{{ route('add') }}" class="px-4 py-2 text-sm text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#f53003] dark:hover:text-[#FF4433] transition-colors">
                             Add Product
                         </a>
-                        <a href="/login" class="px-4 py-2 text-sm border border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b] rounded-sm text-[#1b1b18] dark:text-[#EDEDEC] transition-colors">
+                        <a href="{{ route('sinhvien') }}" class="px-4 py-2 text-sm text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#f53003] dark:hover:text-[#FF4433] transition-colors">
+                            Student Info
+                        </a>
+                        <a href="{{ route('banco', ['n' => 8]) }}" class="px-4 py-2 text-sm text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#f53003] dark:hover:text-[#FF4433] transition-colors">
+                            Chessboard
+                        </a>
+                        <a href="{{ route('login') }}" class="px-4 py-2 text-sm border border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b] rounded-sm text-[#1b1b18] dark:text-[#EDEDEC] transition-colors">
                             Login
                         </a>
                     </div>

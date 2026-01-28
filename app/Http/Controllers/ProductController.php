@@ -90,4 +90,21 @@ class ProductController extends Controller implements HasMiddleware
         $request->session()->flush();
         return redirect()->route('login');
     }
+
+    public function sinhvien(?string $name = null, ?string $mssv = null){
+        // Set default values if parameters are not provided
+        $name = $name ?? "Luong Xuan Hieu";
+        $mssv = $mssv ?? "123456";
+        
+        return view('sinhvien', [
+            'name' => $name,
+            'mssv' => $mssv
+        ]);
+    }
+
+    public function banco(int $n = 8){
+        // Ensure n is between 1 and 20 for reasonable display
+        $n = max(1, min(20, $n));
+        return view('banco', ['n' => $n]);
+    }
 }
