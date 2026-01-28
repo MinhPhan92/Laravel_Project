@@ -12,5 +12,21 @@
     - "/sinhvien/{name}/{mssv}": trả về thông tin giới thiệu của sinh viên làm bài, name mặc định "Luong Xuan Hieu", mssv mặc định "123456"
     - "/banco/{n}": trả về view banco hiển thị bàn cờ vua kích thước n*n.
 
-//deadline 26/1/2026
-Làm đăng nhập đăng ký
+//29/1/26
+commit 1:
+tạo view signin để người dùng đăng ký tài khoản gồm các trường
+username, password, repass, mssv, lopmonhoc, gioitinh
+(vd: minhpd, 123abc, 123abc, 0114567, 67pm1, nam)
+khi nhấn signin thì gọi đến hàm checksignin
+tạo authcontroller có 2 hàm:
+signin: trả về view signin
+checksignin: kiểm tra dữ liệu gửi từ form
+nếu trùng với thông tin sinh viên làm bài thì trả về đăng ký thành công
+nếu password != repass hoặc thông tin sai thì trả về đăng ký thất bại
+commit 2:
+tạo view để người dùng nhập tuổi, lưu vào session
+tạo middleware kiểm tra tuổi:
+nếu >= 18 thì cho phép tiếp tục
+nếu < 18 hoặc dữ liệu không phải số thì trả về không được phép truy cập
+có thể chủ động trong cách xử lý như trả về json, text, view ...
+tuy nhiên cần giữ yêu cầu bài làm
