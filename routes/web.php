@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\TestController;
 use App\Http\Middleware\CheckTimeAccess;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -44,29 +43,35 @@ Route::prefix('product')->group(function () {
     });
 });
 
-Route::get('/login', function () {
-    return view('login');
-})->middleware(CheckTimeAccess::class)->name('login');
+// Route::get('/login', function () {
+//     return view('login');
+// })->middleware(CheckTimeAccess::class)->name('login');
 
-Route::post('/product/checkLogin', [ProductController::class, 'checkLogin']);
+// Route::post('/product/checkLogin', [AuthController::class, 'checkLogin']);
 
-Route::get('/register', [ProductController::class, 'register'])->name('register');
-Route::post('/register', [ProductController::class, 'checkRegister']);
+Route::get('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'checkRegister']);
 
-Route::get('/logout', [ProductController::class, 'logout']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
-Route::resource('test', TestController::class);
+Route::resource('products', ProductController::class);
 
-Route::get('/signin', [AuthController::class, 'SignIn'])->name('signin');
-Route::post('/signin', [AuthController::class, 'CheckSignIn'])->name('checksignin');
-
-Route::get('/age', function(){
-    return view('age');
-});
+// Route::get('/signin', [AuthController::class, 'SignIn'])->name('signin');
+// Route::post('/signin', [AuthController::class, 'CheckSignIn'])->name('checksignin');
 
 Route::post('/age', function(\Illuminate\Http\Request $request){
     session(['age' => $request->age]);
     return "đã lưu tuổi vào session";
+});
+
+Route::get('/age', function () {
+    $age = session('age');
+
+    if ($age) {
+        return "tuổi của bạn là: " . $age;
+    } else {
+        return "chưa có tuổi trong session";
+    }
 });
 
 Route::get('/restrict', function(){
@@ -74,14 +79,21 @@ Route::get('/restrict', function(){
 })->middleware(App\Http\Middleware\CheckAge::class)->name('home');
 
 // Student information route with named route and default values
-Route::get('/sinhvien/{name?}/{mssv?}', [ProductController::class, 'sinhvien'])
-    ->where(['name' => '[a-zA-Z\s]+', 'mssv' => '[0-9]+'])
-    ->name('sinhvien');
+Route::get('/sinhvien/{name?}/{mssv?}', function($name = null, $mssv = null){
+    return 'Name: '. $name . ', MSSV: ' . $mssv;
+});
 
 // Chessboard route with named route
 Route::get('/banco/{n}', [ProductController::class, 'banco'])
     ->where('n', '[0-9]+')
     ->name('banco');
+
+Route::get('/admin', function() {
+    return view('layout.admin');
+});
+
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/checklogin', [AuthController::class, 'checklogin'])->name('checklogin');
 
 Route::fallback(function() {
     return view('error.404');

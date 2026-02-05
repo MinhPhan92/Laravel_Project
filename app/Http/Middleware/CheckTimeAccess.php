@@ -19,19 +19,12 @@ class CheckTimeAccess
         $now = now();
         $start = Carbon::parse('00:00:00');
         $end = Carbon::parse('23:59:59');
-        if($now->between($start, $end)){
+        if ($now->between($start, $end)) {
             return $next($request);
-        }
-        else{
-            return response()->json([
-            'message' => 'Access Denied',
-            'time' => $now->format('H:i:s')
-        ], 403);
         }
         return response()->json([
             'message' => 'Access Denied',
-            'time' => $now->format('H:i:s')
+            'time' => $now->format('H:i:s'),
         ], 403);
-        //return $next($request);
     }
 }

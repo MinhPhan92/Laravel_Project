@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\CheckTimeAccess;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
-use Psy\ManualUpdater\Checker;
+use App\Models\Product;
 
 class ProductController extends Controller implements HasMiddleware
 {
@@ -16,79 +16,29 @@ class ProductController extends Controller implements HasMiddleware
     }
     //
     public function index(){
-        $title = "Product List";
-        return view("product.index", ['title' => $title,
-        'products'=>[
-            ['id'=>1, 'name'=>'Product A', 'price'=>100],
-            ['id'=>2, 'name'=>'Product B', 'price'=>150],
-            ['id'=>3, 'name'=>'Product C', 'price'=>200]
-        ]
-        ]);
+        //
+        $product = Product::all();
+        $title = '';
+        return view('admin.product.index', ['products'=>$product, 'title'=>$title]);
     }
 
     public function create(){
-        return view("product.add");
+        return view("admin.product.add");
     }
 
     public function get(string $id = "123"){
-        return view("product.detail", ['id' => $id]);
+        return view("admin.product.detail", ['id' => $id]);
     }
 
     public function store(Request $request){
-        var_dump($request->all());
-    }
+        $product = new Product();
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
 
-    public function checkLogin(Request $request){
-        if($request->input('username') == 'minhpd' && $request->input('pass') == '123456'){
-            return "Đăng nhập thành công";
-        }
-        else{
-            return "Đăng nhập thất bại";
-        }
-    }
+        $product->save();
 
-    public function login(){
-        return view('login');
-    }
-
-    public function register(){
-        return view('register');
-    }
-
-    public function checkRegister(Request $request){
-        $username = $request->input('username');
-        $email = $request->input('email');
-        $password = $request->input('pass');
-        $confirmPassword = $request->input('confirm_pass');
-
-        $errors = [];
-
-        if(empty($username)){
-            $errors[] = "Username is required.";
-        }
-
-        if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errors[] = "A valid email is required.";
-        }
-
-        if(empty($password)){
-            $errors[] = "Password is required.";
-        }
-
-        if($password !== $confirmPassword){
-            $errors[] = "Passwords do not match.";
-        }
-
-        if(!empty($errors)){
-            return view('register', ['errors' => $errors]);
-        }
-
-        return "Registration successful for user: " . htmlspecialchars($username);
-    }
-
-    public function logout(Request $request){
-        $request->session()->flush();
-        return redirect()->route('login');
+        return redirect('/product');
     }
 
     public function sinhvien(?string $name = null, ?string $mssv = null){
@@ -106,5 +56,28 @@ class ProductController extends Controller implements HasMiddleware
         // Ensure n is between 1 and 20 for reasonable display
         $n = max(1, min(20, $n));
         return view('banco', ['n' => $n]);
+    }
+
+    public function edit(string $id){
+        $product = Product::find($id);
+        return view('product.edit', ['product' => $product]);
+    }
+
+    public function update(Request $request, string $id){
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+
+        $product->save();
+
+        return redirect('/product');
+    }
+
+    public function destroy(string $id){
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect('/product');
     }
 }
