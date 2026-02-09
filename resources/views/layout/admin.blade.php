@@ -26,6 +26,131 @@
   <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="/adminlte/plugins/summernote/summernote-bs4.min.css">
+
+  <!-- Custom admin theme -->
+  <style>
+    /* ===== RESET CƠ BẢN ===== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f6f8;
+        color: #333;
+    }
+
+    /* ===== CONTAINER ===== */
+    .container {
+        max-width: 1100px;
+        margin: 30px auto;
+        background: #fff;
+        padding: 25px;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* ===== TIÊU ĐỀ ===== */
+    h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    /* ===== BUTTON ===== */
+    .btn {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+    }
+
+    /* ===== TABLE ===== */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    table thead {
+        background-color: #2c3e50;
+        color: #fff;
+    }
+
+    table th,
+    table td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* ===== FORM ===== */
+    form {
+        max-width: 500px;
+    }
+
+    form div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: none;
+        border-color: #3498db;
+    }
+
+    /* ===== ACTION LINK ===== */
+    .action-link {
+        color: #3498db;
+        text-decoration: none;
+    }
+
+    .action-link:hover {
+        text-decoration: underline;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

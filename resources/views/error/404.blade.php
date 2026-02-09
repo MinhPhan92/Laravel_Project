@@ -1,35 +1,37 @@
-@extends('layouts.app')
-
-@section('title', '404 - Page Not Found')
-
-@section('content')
-<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="text-center">
-        <div class="mb-8">
-            <h1 class="text-9xl font-bold text-[#f53003] dark:text-[#FF4433]">404</h1>
-        </div>
-        
-        <div class="bg-white dark:bg-[#161615] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-lg p-8">
-            <h2 class="text-2xl font-bold text-[#1b1b18] dark:text-[#EDEDEC] mb-4">Page Not Found</h2>
-            <p class="text-[#706f6c] dark:text-[#A1A09A] mb-6">
-                The page you are looking for could not be found. It may have been moved, deleted, or the URL may be incorrect.
-            </p>
-            
-            <div class="flex gap-4 justify-center">
-                <a 
-                    href="/"
-                    class="px-5 py-2 bg-[#1b1b18] dark:bg-[#eeeeec] dark:text-[#1C1C1A] hover:bg-black dark:hover:bg-white border border-black dark:border-[#eeeeec] dark:hover:border-white text-white dark:text-[#1C1C1A] rounded-sm text-sm font-medium transition-colors"
-                >
-                    Go Home
-                </a>
-                <a 
-                    href="/product"
-                    class="px-5 py-2 border border-[#19140035] dark:border-[#3E3E3A] hover:border-[#1915014a] dark:hover:border-[#62605b] rounded-sm text-sm text-[#1b1b18] dark:text-[#EDEDEC] transition-colors"
-                >
-                    View Products
-                </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found</title>
+    <style>
+        :root { --bg: #fafaf9; --card: #fff; --text: #1c1917; --muted: #78716c; --accent: #dc2626; --border: #e7e5e4; --radius: 0.5rem; --shadow: 0 1px 3px rgba(0,0,0,.08); }
+        * { box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; min-height: 100vh; padding: 2rem 1rem; line-height: 1.5; text-align: center; }
+        .wrap { max-width: 32rem; margin: 0 auto; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 2.5rem; }
+        .code { font-size: 4rem; font-weight: 700; color: var(--accent); margin: 0; line-height: 1; }
+        h1 { font-size: 1.25rem; font-weight: 700; margin: 1rem 0 .5rem; }
+        .sub { font-size: .875rem; color: var(--muted); margin-bottom: 1.5rem; }
+        .btns { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+        .btn { display: inline-block; padding: .625rem 1.25rem; font-size: .875rem; font-weight: 500; text-align: center; border-radius: var(--radius); cursor: pointer; text-decoration: none; transition: opacity .15s; }
+        .btn-primary { background: #1c1917; color: #fff; border: none; }
+        .btn-primary:hover { opacity: .9; }
+        .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .btn-outline:hover { background: #f5f5f4; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="card">
+            <p class="code">404</p>
+            <h1>Page not found</h1>
+            <p class="sub">The page you're looking for doesn't exist or was moved.</p>
+            <div class="btns">
+                <a href="/" class="btn btn-primary">Go home</a>
+                <a href="/product" class="btn btn-outline">Products</a>
             </div>
         </div>
     </div>
-</div>
-@endsection
+</body>
+</html>

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Middleware\CheckTimeAccess;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -94,6 +95,15 @@ Route::get('/admin', function() {
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/checklogin', [AuthController::class, 'checklogin'])->name('checklogin');
+
+Route::prefix('categories')->name('categories.')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('index');
+    Route::get('/create', [CategoryController::class, 'create'])->name('create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
+});
 
 Route::fallback(function() {
     return view('error.404');
