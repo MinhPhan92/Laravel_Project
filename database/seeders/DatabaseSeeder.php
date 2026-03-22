@@ -6,12 +6,15 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * Seeder gốc: chạy bằng php artisan db:seed hoặc migrate --seed.
+ */
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
     /**
-     * Seed the application's database.
+     * Tạo user mẫu + gọi CategorySeeder.
      */
     public function run(): void
     {
@@ -21,5 +24,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        $this->call(CategorySeeder::class);
     }
 }

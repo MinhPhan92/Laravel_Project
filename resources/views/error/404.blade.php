@@ -1,3 +1,4 @@
+{{-- Trang lỗi 404 (route fallback) --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>

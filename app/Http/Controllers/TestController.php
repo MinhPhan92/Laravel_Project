@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+/**
+ * Controller mẫu do artisan tạo (resource CRUD rỗng).
+ * Hiện chưa gắn route trong web.php — có thể xóa hoặc dùng để thử nghiệm.
+ */
 class TestController extends Controller
 {
     /**

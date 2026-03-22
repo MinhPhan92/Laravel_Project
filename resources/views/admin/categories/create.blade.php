@@ -1,3 +1,4 @@
+{{-- Form thêm danh mục (có chọn danh mục cha) --}}
 @extends('layout.admin')
 
 @section('content')

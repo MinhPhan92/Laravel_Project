@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
 
+/**
+ * Middleware: chỉ cho phép truy cập trong khoảng giờ (ở đây gần như cả ngày 00:00–23:59).
+ * Gắn vào nhóm route admin — có thể chỉnh $start/$end để hạn chế giờ làm việc.
+ */
 class CheckTimeAccess
 {
     /**
-     * Handle an incoming request.
-     *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response

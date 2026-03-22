@@ -1,4 +1,4 @@
-
+{{-- Form đăng nhập --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +24,12 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-
+      @if (session('success'))
+        <p class="text-success">{{ session('success') }}</p>
+      @endif
+      @if (session('error'))
+        <p class="text-danger">{{ session('error') }}</p>
+      @endif
       <form action="{{ route('checklogin') }}" method="post">
         @csrf
         <div class="input-group mb-3">

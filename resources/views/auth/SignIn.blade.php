@@ -1,3 +1,4 @@
+{{-- View đăng nhập dạng khác (có thể dùng thay login.blade) --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>

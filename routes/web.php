@@ -1,110 +1,84 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+/**
+ * Định nghĩa route web (trình duyệt).
+ * - Route khách: đăng ký, đăng nhập, shop frontend.
+ * - Route admin: prefix /admin, cần đăng nhập + middleware CheckTimeAccess.
+ */
+
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Middleware\CheckTimeAccess;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Frontend\ProductController as FrontProductController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/', function () {
-//     return view('hello');
-// });
-
-// Route::get('/product', function () {
-//     return view('product.index');
-// });
-
-// Route::get('/product/add', function () {
-//     return view('product.add');
-// });
-
-// Route::get('/product/{id}', function ($id) {
-//     return view('product.detail', ['id' => $id]);
-// });
-
-Route::get('/', function(){
-    if(!session()->has('username')){
-        return redirect()->route('login');
-    }
-    else{
-        return redirect()->route('home');
-    }
+// Trang chủ: đã login → vào CRUD sản phẩm admin; chưa login → form đăng nhập
+Route::get('/', function () {
+    return Auth::check()
+        ? redirect()->route('products.index')
+        : redirect()->route('login');
 });
 
-Route::prefix('product')->group(function () {
-    Route::controller(ProductController::class)->group(function(){
-        Route::get('/', 'index')->middleware(CheckTimeAccess::class);
-        Route::get('/add', [ProductController::class, 'create'])->name('add');
-        Route::post('/store', [ProductController::class, 'store']);
-        Route::get('/{id}', [ProductController::class, 'get']);
-    });
-});
-
-// Route::get('/login', function () {
-//     return view('login');
-// })->middleware(CheckTimeAccess::class)->name('login');
-
-// Route::post('/product/checkLogin', [AuthController::class, 'checkLogin']);
-
+// Đăng ký tài khoản
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'checkRegister']);
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
-Route::resource('products', ProductController::class);
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/checklogin', [AuthController::class, 'checklogin'])->name('checklogin');
 
-// Route::get('/signin', [AuthController::class, 'SignIn'])->name('signin');
-// Route::post('/signin', [AuthController::class, 'CheckSignIn'])->name('checksignin');
-
-Route::post('/age', function(\Illuminate\Http\Request $request){
+// Demo session: lưu/đọc tuổi (bài tập)
+Route::post('/age', function (\Illuminate\Http\Request $request) {
     session(['age' => $request->age]);
     return "đã lưu tuổi vào session";
 });
 
 Route::get('/age', function () {
     $age = session('age');
-
     if ($age) {
         return "tuổi của bạn là: " . $age;
-    } else {
-        return "chưa có tuổi trong session";
     }
+    return "chưa có tuổi trong session";
 });
 
-Route::get('/restrict', function(){
+// Route demo: kiểm tra tuổi (>=18) qua middleware CheckAge
+Route::get('/restrict', function () {
     return "bạn đã truy cập vào trang bị hạn chế";
 })->middleware(App\Http\Middleware\CheckAge::class)->name('home');
 
-// Student information route with named route and default values
-Route::get('/sinhvien/{name?}/{mssv?}', function($name = null, $mssv = null){
-    return 'Name: '. $name . ', MSSV: ' . $mssv;
+Route::get('/sinhvien/{name?}/{mssv?}', function ($name = null, $mssv = null) {
+    return 'Name: ' . $name . ', MSSV: ' . $mssv;
 });
 
-// Chessboard route with named route
-Route::get('/banco/{n}', [ProductController::class, 'banco'])
+// Demo bàn cờ (bài tập)
+Route::get('/banco/{n}', [AdminProductController::class, 'banco'])
     ->where('n', '[0-9]+')
     ->name('banco');
 
-Route::get('/admin', function() {
-    return view('layout.admin');
-});
+// Khu vực quản trị: URL bắt đầu bằng /admin, cần đăng nhập
+Route::prefix('admin')
+    ->middleware(['auth', CheckTimeAccess::class])
+    ->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/checklogin', [AuthController::class, 'checklogin'])->name('checklogin');
+        Route::resource('products', AdminProductController::class);
+        Route::resource('categories', AdminCategoryController::class);
+        Route::resource('users', AdminUserController::class)
+            ->names('admin.users')
+            ->only(['index', 'edit', 'update', 'destroy']);
+    });
 
-Route::prefix('categories')->name('categories.')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('index');
-    Route::get('/create', [CategoryController::class, 'create'])->name('create');
-    Route::post('/store', [CategoryController::class, 'store'])->name('store');
-    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
-    Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
-    Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
-});
+// Shop frontend (khách): danh sách, chi tiết, tìm kiếm — không bắt buộc login
+Route::get('/products', [FrontProductController::class, 'index'])->name('frontend.products.index');
+Route::get('/products/{id}', [FrontProductController::class, 'show'])->name('frontend.products.show');
+Route::get('/search', [FrontProductController::class, 'search'])->name('frontend.products.search');
 
-Route::fallback(function() {
+// URL không khớp route nào → trang 404
+Route::fallback(function () {
     return view('error.404');
 });

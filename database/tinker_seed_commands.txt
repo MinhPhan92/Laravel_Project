@@ -1,0 +1,16 @@
+# Thêm data bằng SQL (không dùng Tinker)
+
+Mở file: database/seed_data.sql
+
+Chạy trong phpMyAdmin:
+1. Chọn database qlbh_67pm34
+2. Vào tab SQL
+3. Copy toàn bộ nội dung file seed_data.sql và dán vào
+4. Bấm "Thực thi" / "Go"
+
+Hoặc chạy từ terminal (MySQL client):
+  mysql -u root -p qlbh_67pm34 < database/seed_data.sql
+
+Sau khi chạy xong:
+- Đăng nhập: admin@example.com
+- Mật khẩu: password

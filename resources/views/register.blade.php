@@ -1,3 +1,4 @@
+{{-- Form đăng ký tài khoản --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
     <div class="wrap">
         <div class="card">
             <h1>Register Page</h1>
-            <form method="POST" action="/register">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">
                     <label>Name</label>
@@ -26,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label>Confirm Password</label>
-                    <input type="password" name="repass">
+                    <input type="password" name="password_confirmation">
                 </div>
                 <button type="submit" class="btn">Register</button>
             </form>

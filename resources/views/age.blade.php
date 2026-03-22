@@ -1,3 +1,4 @@
+{{-- Demo form nhập tuổi (bài tập session) --}}
 <!DOCTYPE html>
 <html lang="vi">
 <head>

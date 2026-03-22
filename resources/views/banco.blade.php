@@ -1,3 +1,4 @@
+{{-- Demo vẽ bàn cờ n x n --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>

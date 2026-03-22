@@ -1,3 +1,4 @@
+  {{-- Menu trái admin: liên kết CRUD danh mục, sản phẩm --}}
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -34,8 +35,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item {{ request()->routeIs('categories.*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Quản lý danh mục
@@ -44,15 +45,38 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('categories.index') }}" class="nav-link active">
+                <a href="{{ route('categories.index') }}" class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách danh mục</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('categories.create') }}" class="nav-link">
+                <a href="{{ route('categories.create') }}" class="nav-link {{ request()->routeIs('categories.create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm danh mục</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item {{ request()->routeIs('products.*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Quản lý sản phẩm
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách sản phẩm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('products.create') }}" class="nav-link {{ request()->routeIs('products.create') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm sản phẩm</p>
                 </a>
               </li>
             </ul>

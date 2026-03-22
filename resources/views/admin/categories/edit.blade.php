@@ -1,3 +1,4 @@
+{{-- Form sửa danh mục --}}
 @extends('layout.admin')
 
 @section('content')
@@ -6,6 +7,7 @@
 
         <form method="POST" action="{{ route('categories.update', $category->id) }}">
             @csrf
+            @method('PUT')
 
             <div>
                 <label for="name">Tên danh mục</label>

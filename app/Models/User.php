@@ -7,13 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Model Người dùng — dùng cho đăng nhập Laravel (guard web).
+ * is_active: có thể mở rộng để khóa tài khoản (cần kiểm tra thêm trong login nếu muốn).
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Thuộc tính được phép gán hàng loạt.
      *
      * @var list<string>
      */
@@ -21,10 +25,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_active',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Ẩn khi chuyển user sang JSON/array (API).
      *
      * @var list<string>
      */
@@ -34,7 +39,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Ép kiểu (password tự hash khi gán).
      *
      * @return array<string, string>
      */

@@ -1,9 +1,13 @@
+{{-- Danh sách danh mục (admin) --}}
 @extends('layout.admin')
 
 @section('content')
     <div class="container">
         <h1>Danh mục sản phẩm</h1>
 
+        @if (session('success'))
+            <p class="text-success">{{ session('success') }}</p>
+        @endif
         <a href="{{ route('categories.create') }}" class="btn btn-primary">Thêm danh mục mới</a>
 
         <table>
@@ -21,7 +25,7 @@
                         <td>{{ $category->parent?->name }}</td>
                         <td>
                             <a href="{{ route('categories.edit', $category->id) }}" class="action-link">Sửa</a>
-                            <form action="{{ route('categories.delete', $category->id) }}" method="POST" style="display: inline;">
+                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-primary">Xóa</button>
@@ -31,5 +35,6 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $categories->links() }}
     </div>
 @endsection
